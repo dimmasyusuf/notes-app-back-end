@@ -1,7 +1,14 @@
-const { nanoid } = require('nanoid');
-const notes = require('./notes');
+import { nanoid } from 'nanoid';
+import notes from './notes.js';
 
-const addNoteHandler = (request, h) => {
+export const getAllNotesHandler = () => ({
+  status: 'success',
+  data: {
+    notes,
+  },
+});
+
+export const addNoteHandler = (request, h) => {
   const { title, tags, body } = request.payload;
 
   const id = nanoid(16);
@@ -40,5 +47,3 @@ const addNoteHandler = (request, h) => {
   response.code(500);
   return response;
 };
-
-module.exports = { addNoteHandler };
